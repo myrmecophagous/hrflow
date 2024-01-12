@@ -1,0 +1,79 @@
+.modal {
+  animation: unfold 0.5s ease-in-out forwards;
+  background-color: var(--light-background);
+  border-radius: 4px;
+  box-shadow: 0 0 1px var(--color-primary-start);
+  color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  position: relative;
+  width: calc(75ch) !important;
+  z-index: 4;
+}
+
+.close {
+  position: absolute;
+  background: transparent;
+  width: 16px;
+  height: 16px;
+  border: none;
+  margin: 1rem 1.2rem;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.category {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  border: solid thin rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  font-size: smaller;
+  padding: 4px 8px;
+  width: fit-content;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  min-height: fit-content;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.tag {
+  font-size: smaller;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: solid thin rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
+  display: inline-block;
+}
+
+.h2 {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.modal ul {
+  margin: 0;
+}
