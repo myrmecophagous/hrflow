@@ -1,14 +1,17 @@
 import JobList from '@/components/JobList/JobList';
-import { Job } from '@/components/JobList/JobList';
 import { getJobs, getCatogories } from '@/app/actions';
+
+import styles from './Wrapper.module.css';
 
 
 export default async function Wrapper() {
 
-  const jobs: Job[] = await getJobs();
+  const jobs = await getJobs();
   const categories: string[] = await getCatogories();
 
   return (
-    <JobList jobs={jobs} categories={categories} />
+    <div className={styles.wrapper}>
+      <JobList jobs={jobs} categories={categories} />
+    </div>
   );
 }

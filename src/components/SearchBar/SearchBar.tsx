@@ -2,7 +2,6 @@
 
 import Select, { SelectOption } from '@/components/Select/Select';
 import styles from './SearchBar.module.css';
-import { Job } from '@/components/JobList/JobList';
 
 
 interface SearchBarProps {
@@ -56,7 +55,7 @@ export default function SearchBar({
     />
     <Select
       label="Sort by"
-      onChange={(e) => handleSort(e.target.value as keyof Job)}
+      onChange={(e) => handleSort(e.target.value)}
       options={sorts}
       selected={selectedSort}
     />
