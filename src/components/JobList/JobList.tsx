@@ -56,9 +56,10 @@ interface JobListProps {
   jobs: Job[];
 };
 
+const CARDS_PER_PAGE = 10;
+
 export default function JobList({jobs, categories}: JobListProps) {
   // Search Bar & Local Storage
-  const [cardsPerPage] = useLocalStorage<number>('cardsPerPage', 10);
   const [filter, setFilter, resetFilter] = useLocalStorage<string>('filter', '');
   const [category, setCategory, resetCategory] = useLocalStorage<string>('category', '');
   const categoryOptions = categories.map((category) => ({
@@ -127,17 +128,14 @@ export default function JobList({jobs, categories}: JobListProps) {
     let closestCardIndex = -1;
     filteredJobs.forEach((job, i) => {
       if (job.ref?.current) {
-        const {x, y} = job.ref.current.getBoundingClientRect();
-        const distance = getDistance(pos, {x, y});
+        const {x, y, width, height} = job.ref.current.getBoundingClientRect();
+        const distance = getDistance(pos, {x: x + width / 2, y: y + height / 2});
         if (distance < min) {
           min = distance;
           closestCardIndex = i;
         }
       }
     });
-    if (closestCardIndex === -1) {
-      return;
-    }
     const moveCardIndex = filteredJobs.findIndex((job) => job.id === id);
     if (moveCardIndex === closestCardIndex) {
       return;
@@ -181,7 +179,7 @@ export default function JobList({jobs, categories}: JobListProps) {
     <div className={styles.container}>
       {
         jobs && filteredJobs.length > 0 &&
-          filteredJobs.slice((page - 1) * cardsPerPage, page * cardsPerPage)
+          filteredJobs.slice((page - 1) * CARDS_PER_PAGE, page * CARDS_PER_PAGE)
           .map((job) => <Card
             key={job.id}
             {...job}
@@ -201,10 +199,10 @@ export default function JobList({jobs, categories}: JobListProps) {
     </div>
 
     {
-      (jobs && filteredJobs.length > cardsPerPage)
+      (jobs && filteredJobs.length > CARDS_PER_PAGE)
       ?
         <ErrorBoundary FallbackComponent={ErrorMessage}>
-          <Pagination current={page} length={Math.ceil(jobs.length / cardsPerPage)} onClick={setPage} />
+          <Pagination current={page} length={Math.ceil(jobs.length / CARDS_PER_PAGE)} onClick={setPage} />
         </ErrorBoundary>
       :
         <div></div>
