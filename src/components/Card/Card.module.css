@@ -20,6 +20,19 @@
     0 0 3px var(--color-primary-start);
 }
 
+.card .insertMarker {
+  --margin: 1rem;
+  width: 0;
+  height: calc(100% - 2 * var(--margin));
+  margin-block: var(--margin);
+  position: absolute;
+  border: solid 1px var(--color-primary-start);
+  top: 0;
+  left: -1.25rem;
+  z-index: 2;
+  opacity: 0;
+}
+
 .card .header {
   font-size: 1.2rem;
   margin: 0;
