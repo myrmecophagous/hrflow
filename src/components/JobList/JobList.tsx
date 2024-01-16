@@ -161,7 +161,7 @@ export default function JobList({jobs, categories}: JobListProps) {
   const handleDragStart = (id: number) => {
     const i = filteredJobs.findIndex((job) => job.id === id);
     setDraggedCardIndex(i);
-  }
+  };
 
   // Modal
   const [activeCardId, setActiveCardId] = useState<number>(-1);
@@ -199,12 +199,12 @@ export default function JobList({jobs, categories}: JobListProps) {
           .map((job, i) => <Card
             key={job.id}
             {...job}
-            ref={job.ref}
             hover={i === targetCardIndex}
-            onOpen={() => openCard(job)}
-            onDragStart={handleDragStart}
             onDragEnd={handleDrop}
             onDragOver={handleHover}
+            onDragStart={handleDragStart}
+            onOpen={() => openCard(job)}
+            ref={job.ref}
           />)
       }
       {

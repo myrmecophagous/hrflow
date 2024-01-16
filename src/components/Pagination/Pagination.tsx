@@ -89,7 +89,8 @@ export default function Pagination({
           className={clsx(page === current && styles.current)}
           disabled={page === current}
           key={page}
-          aria-label={`Go to page number ${page}`}
+          aria-label={page === current ? 'Current page' : `Go to page number ${page}`}
+          aria-current={page === current ? 'page' : undefined}
           onClick={() => goTo(page)}>{page}</PaginationButton>
         )
       }
@@ -120,9 +121,15 @@ export default function Pagination({
 
 
 function PaginationButton(props: ComponentPropsWithoutRef<'button'>) {
-  if (props.disabled) {
+  if (props['aria-current'] === 'page') {
     return (
-      <span className={clsx(styles.button, styles.disabled, props.className)}>
+      <button className={clsx(styles.button, styles.disabled, props.className)} aria-label={props['aria-label']} aria-current={props['aria-current']} disabled={true}>
+        {props.children}
+      </button>
+    );
+  } else if (props.disabled) {
+    return (
+      <span className={clsx(styles.button, styles.disabled, props.className)} aria-label={props['aria-label']} aria-hidden={true}>
         {props.children}
       </span>
     );

@@ -1,12 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { jest, expect } from '@storybook/jest';
+import { userEvent, within } from '@storybook/testing-library';
 
 import Pagination from './Pagination';
+
 
 const meta = {
   title: 'HrFlow.ai/Pagination',
   component: Pagination,
   parameters: {
     layout: 'centered',
+    actions: {
+      handles: ['onClick'],
+    },
+  },
+  argTypes: {
+    onClick: {
+      action: 'onClick',
+    },
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof Pagination>;
@@ -15,11 +26,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 
+const mock = jest.fn();
+
 export const Middle: Story = {
   args: {
     current: 5,
     length: 10,
-    onClick: (page: number) => console.log(page),
+    onClick: mock,
   },
   parameters: {
     docs: {
@@ -28,6 +41,13 @@ export const Middle: Story = {
         Pages greater than or less than 2 from the current page are hidden.`,
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const first = canvas.getByRole('button', {name: 'First page'});
+    await userEvent.click(first);
+    expect(mock).toHaveBeenCalledWith(1);
+    mock.mockClear();
   },
 };
 

@@ -81,7 +81,7 @@ const Card = forwardRef(function Card({
   }
 
   return (
-    <div
+    <article
       className={styles.card}
       draggable="true"
       onClick={onOpen}
@@ -96,7 +96,7 @@ const Card = forwardRef(function Card({
       <div className={styles.insertMarker} style={{opacity: hover ? 1 : 0}} />
       <h1 className={styles.header}>{name}</h1>
       <div className={styles.date}>{dateToHumanReadable(created_at)}</div>
-    </div>
+    </article>
   );
 });
 

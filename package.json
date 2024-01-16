@@ -9,6 +9,7 @@
     "lint": "next lint",
     "start": "next start",
     "storybook": "storybook dev -s ../public -p 6006",
+    "test-storybook": "test-storybook",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -20,14 +21,18 @@
     "react-error-boundary": "^4.0.12"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^7.6.8",
     "@storybook/addon-essentials": "^7.6.7",
-    "@storybook/addon-interactions": "^7.6.7",
+    "@storybook/addon-interactions": "^7.6.8",
     "@storybook/addon-links": "^7.6.7",
     "@storybook/addon-onboarding": "^1.0.10",
     "@storybook/blocks": "^7.6.7",
+    "@storybook/jest": "^0.2.3",
     "@storybook/nextjs": "^7.6.7",
     "@storybook/react": "^7.6.7",
     "@storybook/test": "^7.6.7",
+    "@storybook/test-runner": "^0.16.0",
+    "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@types/jest": "^29.5.11",

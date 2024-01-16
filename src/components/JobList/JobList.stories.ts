@@ -20,7 +20,6 @@ export const Primary: Story = {
   args: {
     jobs: [{
       id: 1,
-      key: '1',
       name: 'Your ad could go here',
       tags: [
         {
@@ -32,7 +31,6 @@ export const Primary: Story = {
     },
     {
       id: 2,
-      key: '2',
       name: '...or here',
       tags: [
         {
@@ -62,6 +60,7 @@ export const NoJobsFound: Story = {
 
 const dummyArray = {
   filter: () => [],
+  find: () => null,
   length: 1,
 };
 
@@ -73,7 +72,7 @@ export const NoJobSatisfiesCriteria: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'This situation arises on a server error.',
+        story: 'This one happens when the searching criteria filter out everything.',
       },
     },
   },
