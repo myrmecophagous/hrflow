@@ -25,3 +25,8 @@ body {
   flex-direction: column;
   padding: 0;
 }
+
+body[aria-hidden="true"] {
+  overflow: hidden;
+  max-height: 100vh;
+}

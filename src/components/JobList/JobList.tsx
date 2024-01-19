@@ -10,6 +10,7 @@ import {
 } from 'react';
 
 import Card from '@/components/Card/Card';
+import CardDetails from '@/components/CardDetails/CardDetails';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
@@ -169,14 +170,19 @@ export default function JobList({jobs, categories}: JobListProps) {
     setActiveCardId((id) => (id === job.id ? -1 : job.id));
   };
 
-  const closeCard = useCallback(() => setActiveCardId(-1), []);
+  const closeCard = useCallback(() => {
+    activeJob?.ref?.current?.focus();
+    setActiveCardId(-1);
+  }, [activeCardId, filteredJobs]);
 
   const activeJob = jobs.find((job) => job?.id === activeCardId);
 
   return (<>
     {
       activeJob &&
-        <Modal job={activeJob} onClose={closeCard} />
+        <Modal onClose={closeCard}>
+          <CardDetails job={activeJob} />
+        </Modal>
     }
 
     <SearchBar
