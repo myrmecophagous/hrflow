@@ -19,26 +19,26 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     id: 1346749,
-    key: '1346749',
     name: 'Human Resources Manager',
     tags: [
       {name: 'category', value: 'Human Resources'},
     ],
+    hover: false,
     created_at: '2023-06-12T17:24:18+0000',
-    onClick: () => {},
+    onOpen: () => {},
   },
 };
 
 export const VeryLongTitle: Story = {
   args: {
     id: 1346749,
-    key: '1346749',
+    hover: false,
     name: `The Most Talanted Human Resources Manager The World Ever Seen
     In The History Of The World For The Last 100 Years And Even More`,
     tags: [
       {name: 'category', value: 'Human Resources'},
     ],
     created_at: '2023-06-12T17:24:18+0000',
-    onClick: () => {},
+    onOpen: () => {},
   },
 };

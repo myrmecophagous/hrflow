@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import SearchBar from './SearchBar';
-import type { Job } from '@/components/JobList/JobList';
 
 
 const meta = {
@@ -23,10 +22,10 @@ export const Default: Story = {
     handleCategory: (value: string) => {},
     handleReset: () => {},
     handleSearch: (value: string) => {},
-    handleSort: (value: keyof Job) => {},
+    handleSort: (value: string) => {},
     handleSortOrder: (value: number) => {},
     selectedCategory: '',
-    selectedSort: '' as keyof Job,
+    selectedSort: '',
     selectedSortOrder: 1,
   },
 };
@@ -38,10 +37,10 @@ export const SortOrderEnabled: Story = {
     handleCategory: (value: string) => {},
     handleReset: () => {},
     handleSearch: (value: string) => {},
-    handleSort: (value: keyof Job) => {},
+    handleSort: (value: string) => {},
     handleSortOrder: (value: number) => {},
     selectedCategory: '',
-    selectedSort: 'title' as keyof Job,
+    selectedSort: 'title',
     selectedSortOrder: -1,
   },
   parameters: {
