@@ -1,6 +1,13 @@
 .header {
   align-items: center;
-  background-color: var(--color-primary);
+  background:
+    repeat-x url('/images/noise.svg'),
+    linear-gradient(
+      to right,
+      var(--header-gradient-start),
+      var(--header-gradient-end),
+    );
+  background-blend-mode: soft-light;
   color: rgb(255, 255, 255);
   display: flex;
   font-size: clamp(1rem, 0.765vw + 0.847rem, 1.5rem);
