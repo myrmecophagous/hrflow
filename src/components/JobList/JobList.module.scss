@@ -13,19 +13,19 @@
   z-index: 2;
   font-style: italic;
   color: var(--color-primary);
-}
 
-.message::before {
-  content: 'i';
-  font-style: normal;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-inline-end: 0.5rem;
-  width: 1rem;
-  height: 1rem;
-  border: solid thin var(--color-primary);
+  &::before {
+    content: 'i';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline-end: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: solid thin var(--color-primary);
+  }
 }

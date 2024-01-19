@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SearchBar from './SearchBar';
 import type { Job } from '@/components/JobList/JobList';
 
+
 const meta = {
   title: 'HrFlow.ai/SearchBar',
   component: SearchBar,

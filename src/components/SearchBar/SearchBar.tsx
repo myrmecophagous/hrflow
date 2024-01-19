@@ -1,7 +1,7 @@
 'use client';
 
 import Select, { SelectOption } from '@/components/Select/Select';
-import styles from './SearchBar.module.css';
+import styles from './SearchBar.module.scss';
 
 
 interface SearchBarProps {

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 
 import { inter } from '../src/app/font';
-import '../src/app/globals.css';
+import '../src/app/globals.scss';
 
 
 const preview: Preview = {

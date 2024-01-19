@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import styles from './Card.module.css';
+import styles from './Card.module.scss';
 import { Job } from '@/components/JobList/JobList';
 import { dateToHumanReadable } from '@/utils/utils';
 

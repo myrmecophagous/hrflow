@@ -2,9 +2,9 @@
 
 import { ComponentPropsWithoutRef } from 'react';
 import Image from 'next/image';
-
 import clsx from 'clsx';
-import styles from './Pagination.module.css';
+
+import styles from './Pagination.module.scss';
 
 
 interface PaginationProps {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, KeyboardEvent } from 'react';
 
-import styles from './Modal.module.css';
+import styles from './Modal.module.scss';
 import type { Job } from '@/components/JobList/JobList';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { dateToHumanReadable } from '@/utils/utils';

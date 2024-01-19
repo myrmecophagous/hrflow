@@ -14,7 +14,7 @@ import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBar from '@/components/SearchBar/SearchBar';
-import styles from './JobList.module.css';
+import styles from './JobList.module.scss';
 import { Position } from '@/components/Card/Card';
 import { SelectOption } from '@/components/Select/Select';
 import { getDistance } from '@/utils/utils';

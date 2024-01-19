@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, ForwardedRef } from 'react';
 
-import styles from './Select.module.css';
+import styles from './Select.module.scss';
 
 
 export interface SelectOption {

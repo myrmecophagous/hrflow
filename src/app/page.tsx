@@ -4,7 +4,7 @@ import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import Skeleton from '@/components/Skeleton/Skeleton';
 import Wrapper from '@/components/Wrapper/Wrapper';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 
 export default async function Home() {
