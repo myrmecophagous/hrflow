@@ -2,12 +2,13 @@
   align-items: center;
   background:
     repeat-x url('/images/noise.svg'),
-    linear-gradient(to right,
+    linear-gradient(
+      to right,
       var(--header-gradient-start),
       var(--header-gradient-end),
     );
   background-blend-mode: soft-light;
-  color: rgb(255, 255, 255);
+  color: var(--footer-text-color, white);
   display: flex;
   font-size: clamp(0.56rem, 0.5vw + 0.5rem, 1rem);
   justify-content: space-around;

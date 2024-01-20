@@ -39,7 +39,7 @@
 .button,
 .input {
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: var(--border-radius, 4px);
   border: solid thin rgba(0, 0, 0, 0.3);
   color: rgba(0, 0, 0, 0.8);
   padding: 4px 8px;

@@ -10,9 +10,9 @@
   .button {
     align-items: center;
     background-color: transparent;
-    border-radius: 4px;
+    border-radius: var(--border-radius, 4px);
     border: none;
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--pagination-color, rgba(0, 0, 0, 0.8));
     cursor: pointer;
     display: flex;
     font-size: 1em;
@@ -21,19 +21,22 @@
     transition: all 0.2s ease-in-out;
 
     &.current {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--pagination-current-bg-color, rgba(0, 0, 0, 0.1)) !important;
       border: none;
+      color: var(--pagination-current-color, rgba(0, 0, 0, 0.8));
       margin: 0 4px;
     }
 
     &.disabled {
+      background-color: var(--pagination-disabled-bg-color, transparent);
       border: none;
+      color: var(--pagination-disabled-color, rgba(0, 0, 0, 0.8));
       cursor: unset;
       outline: none;
     }
 
     &:not(.disabled):hover {
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 2px var(--hover-border-color, rgba(0, 0, 0, 0.5));
     }
   }
 }

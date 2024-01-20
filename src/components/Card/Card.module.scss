@@ -1,12 +1,13 @@
 .card {
-  background-color: var(--light-background);
-  border-radius: 4px;
-  box-shadow: 0 0 1px var(--color-primary-start);
-  color: rgba(0, 0, 0, 0.8);
+  --margin: var(--gap, 2rem) / 2;
+  background-color: var(--card-background-color, rgb(242, 253, 253));
+  border-radius: --var(--border-radius, 4px);
+  box-shadow: 0 0 1px var(--card-border-color, rgb(52, 203, 230));
+  color: var(--card-color, rgba(0, 0, 0, 0.8));
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: calc(var(--margin) * 2);
   justify-content: space-between;
   padding: 0.5rem;
   position: relative;
@@ -15,19 +16,18 @@
 
   &:hover {
     box-shadow:
-      0 0 8px rgba(0, 0, 0, 0.1),
-      0 0 3px var(--color-primary-start);
+      0 0 8px var(--card-shadow-color, rgba(0, 0, 0, 0.1)),
+      0 0 3px var(--card-border-color, rgb(52, 203, 230));
   }
 
   .insertMarker {
-    --margin: 1rem;
     width: 0;
-    height: calc(100% - 2 * var(--margin));
+    height: calc(100% - (2 * var(--margin)));
     margin-block: var(--margin);
     position: absolute;
-    border: solid 1px var(--color-primary-start);
-    top: 0;
-    left: -1.25rem;
+    border: solid 1px var(--card-border-color);
+    top: calc(var(--margin));
+    left: calc(var(--margin) * -1);
     z-index: 2;
     opacity: 0;
   }
@@ -40,8 +40,7 @@
 
   .date {
     font-size: smaller;
-    font-style: italic  ;
+    font-style: italic;
     margin: 0;
-    opacity: 0.8;
   }
 }

@@ -8,7 +8,7 @@
       var(--header-gradient-end),
     );
   background-blend-mode: soft-light;
-  color: rgb(255, 255, 255);
+  color: var(--header-text-color, white);
   display: flex;
   font-size: clamp(1rem, 0.765vw + 0.847rem, 1.5rem);
   font-weight: 500;

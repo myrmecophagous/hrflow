@@ -1,6 +1,7 @@
 .container {
+  --gap: clamp(0.1rem, 1.5vw + 1rem, 3rem);
   display: grid;
-  gap: clamp(0.1rem, 1.5vw + 1rem, 3rem);
+  gap: var(--gap);
   grid-template-columns: repeat(auto-fit, var(--card-width));
   height: min-content;
   justify-content: center;
@@ -12,7 +13,7 @@
 .message {
   z-index: 2;
   font-style: italic;
-  color: var(--color-primary);
+  color: var(--message-color);
 
   &::before {
     content: 'i';
@@ -26,6 +27,6 @@
     margin-inline-end: 0.5rem;
     width: 1rem;
     height: 1rem;
-    border: solid thin var(--color-primary);
+    border: solid thin var(--message-color);
   }
 }

@@ -1,18 +1,22 @@
 :root {
-  --color-primary: rgb(26, 142, 148);
-  --color-primary-start: rgb(52, 203, 230);
-  --dark-background: #07192C;
-  --light-background: #F2FDFD;
+  --message-color: rgb(26, 142, 148);
+  --card-border-color: rgb(52, 203, 230);
+  --card-background-color: rgb(242, 253, 253);
   --card-width: 300px;
-  --card-width-unfolded: 600px;
   --card-height: 280px;
-  --card-height-unfolded: 800px;
-  --outline: solid 2px #21b6eb;
-
+  --border-radius: 4px;
   --header-gradient-start: rgb(121, 106, 249);
   --header-gradient-end: rgb(160, 248, 230);
-  --footer-gradient-start: rgb(252, 141, 200);
-  --footer-gradient-end: rgb(121, 110, 249);
+
+  --color-black: rgba(0, 0, 0, 0.8);
+  --color-border-black: rgba(0, 0, 0, 0.1);
+  --color-background-black: rgba(0, 0, 0, 0.05);
+  --color-white: rgba(255, 255, 255, 0.8);
+  --color-border-white: rgba(255, 255, 255, 0.1);
+  --color-background-white: rgba(255, 255, 255, 0.05);
+
+  --color-light-grey: rgba(50, 50, 50, 0.2);
+  --color-dark-grey: rgba(150, 150, 150, 0.2);
 }
 
 html,
