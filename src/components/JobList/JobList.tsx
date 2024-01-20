@@ -170,12 +170,12 @@ export default function JobList({jobs, categories}: JobListProps) {
     setActiveCardId((id) => (id === job.id ? -1 : job.id));
   };
 
+  const activeJob = jobs.find((job) => job?.id === activeCardId);
+
   const closeCard = useCallback(() => {
     activeJob?.ref?.current?.focus();
     setActiveCardId(-1);
-  }, [activeCardId, filteredJobs]);
-
-  const activeJob = jobs.find((job) => job?.id === activeCardId);
+  }, [activeJob]);
 
   return (<>
     {
