@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import styles from './Modal.module.scss';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { usePressEscape } from '@/hooks/usePressEscape';
 
 
 interface ModalProps {
@@ -32,18 +33,8 @@ export default function Modal({onClose, children, isOpen}: ModalProps) {
     }, ANIMATION_DURATION * 1000);
   }, [onClose]);
   useClickOutside(modalRef, close);
+  usePressEscape(close);
   const [open, setOpen] = React.useState(true);
-
-  const handleKeyUp = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      close();
-    }
-  }, [close]);
-
-  useEffect(() => {
-    document.addEventListener('keyup', (e) => handleKeyUp(e as unknown as KeyboardEvent));
-    return document.removeEventListener('keyup', (e) => handleKeyUp(e as unknown as KeyboardEvent));
-  }, [handleKeyUp]);
 
   useEffect(() => {
     if (modalRef.current) {
