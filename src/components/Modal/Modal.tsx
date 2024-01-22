@@ -51,38 +51,37 @@ export default function Modal({onClose, children, isOpen}: ModalProps) {
     }
   }, [modalRef]);
 
-  const animations = {
-    overlay: {
-      initial: { opacity: 0 },
-      enter: { opacity: 1 },
-      exit: { opacity: 0 },
-    },
-    modal: {
-      initial: { opacity: 0, transform: 'scale(.9)' },
-      enter: { opacity: 1, transform: 'scale(1)' },
-      exit: { opacity: 0, transform: 'scale(.9)' },
-    },
+  const overlayVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+  const modalVariants = {
+    initial: { opacity: 0, transform: 'scale(.9)' },
+    animate: { opacity: 1, transform: 'scale(1)' },
   };
 
   return createPortal(
     <AnimatePresence>
       { open && <>
         <motion.div
-          animate={animations.overlay.enter}
+          animate="animate"
           className={styles.overlay}
-          exit={animations.overlay.initial}
-          initial={animations.overlay.initial}
+          exit="initial"
+          initial="initial"
           key="overlay"
           transition={{ duration : ANIMATION_DURATION }}
+          variants={overlayVariants}
         />
         <motion.dialog
-          animate={animations.modal.enter}
+          animate="animate"
           className={styles.modal}
-          exit={animations.modal.initial}
-          initial={animations.modal.initial}
+          exit="initial"
+          initial="initial"
           key="modal"
           ref={modalRef}
           transition={{ duration : ANIMATION_DURATION }}
+          variants={modalVariants}
+          data-cy="card-dialog"
         >
           <button className={styles.close} onClick={close} aria-label="Close">
             <Image

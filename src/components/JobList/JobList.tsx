@@ -198,7 +198,7 @@ export default function JobList({jobs, categories}: JobListProps) {
       selectedSortOrder={sortOrder}
     />
 
-    <div className={styles.container}>
+    <div className={styles.container} data-cy="card-list">
       {
         jobs && filteredJobs.length > 0 &&
           filteredJobs.slice((page - 1) * CARDS_PER_PAGE, page * CARDS_PER_PAGE)

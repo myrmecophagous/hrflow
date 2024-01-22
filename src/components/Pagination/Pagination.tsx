@@ -62,7 +62,7 @@ export default function Pagination({
   const list = Array.from({ length: length }, (_, i) => i + 1).slice(start, end);
 
   return (
-    <nav className={styles.pagination}>
+    <nav className={styles.pagination} data-cy="pagination">
       <PaginationButton onClick={() => goTo(1)} disabled={current === 1} aria-label="First page">
         <Image
           src="/images/icons/first.svg"

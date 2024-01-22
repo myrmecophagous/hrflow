@@ -5,12 +5,14 @@
   "scripts": {
     "build": "next build",
     "build-storybook": "storybook build",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
     "storybook": "storybook dev -s ../public -p 6006",
-    "test-storybook": "test-storybook",
     "test": "jest",
+    "test-storybook": "test-storybook",
     "test:watch": "jest --watch"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^13.6.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-storybook": "^0.6.15",

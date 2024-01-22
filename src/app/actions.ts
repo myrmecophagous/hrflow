@@ -3,13 +3,20 @@
 import { env } from "process";
 import { readFile } from 'fs/promises';
 
+import type { Job } from '@/components/JobList/JobList';
 
-export async function getJobs() {
-  let result = {
-    data: {
-      jobs: [],
-    },
-  };
+
+export async function getJobs(): Promise<Job[]> {
+  if (env.NODE_ENV !== 'production') {
+    return readFile('./src/data/jobs.json', 'utf8').then((data) => {
+      return JSON.parse(data);
+    }).catch((err) => {
+      console.error(err);
+      return [];
+    });
+  }
+
+  let result: Job[] = [];
 
   const endpoint = env.ENDPOINT;
   if (!endpoint) {
@@ -56,8 +63,8 @@ export async function getJobs() {
   }
 
   try {
-    result = await response.json();
-    return result.data.jobs.map((job: any) => {
+    let tmp = await response.json();
+    return tmp.data.jobs.map((job: any) => {
       delete job.key; // interferes with React's `key` prop
       return job;
     });

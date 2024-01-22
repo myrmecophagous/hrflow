@@ -40,7 +40,7 @@ export default function SearchBar({
     { label: 'Category', value: 'category' },
   ];
 
-  return (<div className={styles.search_bar}>
+  return (<div className={styles.search_bar} data-cy="search-bar">
     <div className={styles.input_container}>
       <label>
         <div>Search</div>
