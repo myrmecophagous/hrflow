@@ -1,13 +1,8 @@
 /// <reference types='cypress' />
 
-describe('<Pagination />', () => {
+describe('Pagination', () => {
   beforeEach(() => {
     cy.visit('/');
-  });
-
-  it('should display the pagination', () => {
-    cy.get('[data-cy="pagination"]')
-      .should('exist');
   });
 
   it('should navigate to the next page on number click', () => {

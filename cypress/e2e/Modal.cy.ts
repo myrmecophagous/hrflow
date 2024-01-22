@@ -1,14 +1,17 @@
 /// <reference types='cypress' />
 
-describe('<JobList />', () => {
+describe('JobList', () => {
   beforeEach(() => {
     cy.visit('/');
   });
 
-  it('should display the job list', () => {
+  it('should NOT display the dialog on initial rendering', () => {
     cy.get('[data-cy="card-list"]')
       .get('article')
       .should('have.length', 10);
+
+    cy.get('[data-cy="card-dialog"]')
+      .should('not.exist');
   });
 
   it('should open modal on click', () => {
@@ -94,10 +97,4 @@ describe('<JobList />', () => {
     cy.get('@firstCard')
       .should('have.focus');
   });
-
-  /*
-  it('should reorder cards on drag and drop');
-  it('should NOT reorder cards if dropped on the same position');
-  it('should NOT reorder cards if custom sort is enabled');
-  */
 });

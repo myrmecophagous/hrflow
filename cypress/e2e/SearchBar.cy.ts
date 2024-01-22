@@ -1,6 +1,6 @@
 /// <reference types='cypress' />
 
-describe('<SearchBar />', () => {
+describe('SearchBar', () => {
   beforeEach(() => {
     cy.visit('/');
   });

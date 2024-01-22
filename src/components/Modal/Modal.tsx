@@ -23,7 +23,10 @@ const CLOSE_IMAGE_SIZE = 20;
 const ANIMATION_DURATION = .2; // s
 
 export default function Modal({onClose, children, isOpen}: ModalProps) {
+
   const modalRef = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = React.useState(true);
+
   const close = useCallback(() => {
     setOpen(false);
     const timeoutId = setTimeout(() => {
@@ -31,9 +34,9 @@ export default function Modal({onClose, children, isOpen}: ModalProps) {
       clearTimeout(timeoutId);
     }, ANIMATION_DURATION * 1000);
   }, [onClose]);
+
   useClickOutside(modalRef, close);
   usePressEscape(close);
-  const [open, setOpen] = React.useState(true);
 
   useEffect(() => {
     if (modalRef.current) {
@@ -45,6 +48,7 @@ export default function Modal({onClose, children, isOpen}: ModalProps) {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
   };
+
   const modalVariants = {
     initial: { opacity: 0, transform: 'scale(.9)' },
     animate: { opacity: 1, transform: 'scale(1)' },
