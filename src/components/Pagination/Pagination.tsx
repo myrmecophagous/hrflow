@@ -5,6 +5,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 
 import styles from './Pagination.module.scss';
+import { getPaginationList } from '@/utils/utils';
 
 
 interface PaginationProps {
@@ -54,12 +55,7 @@ export default function Pagination({
     }
   };
 
-  let start = current > length - span - 1 ? -(span * 2 + 1) : current - span - 1;
-  if (start < 0 && current <= span + 1) {
-    start = 0;
-  }
-  const end = current <= span + 1 ? (span * 2 + 1) : current + span;
-  const list = Array.from({ length: length }, (_, i) => i + 1).slice(start, end);
+  const list = getPaginationList(current, length, span);
 
   return (
     <nav className={styles.pagination} data-cy="pagination">
