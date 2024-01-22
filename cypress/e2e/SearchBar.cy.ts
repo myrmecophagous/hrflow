@@ -61,8 +61,7 @@ describe('SearchBar', () => {
 
     cy.get('[data-cy="search-bar"]')
       .as('searchBar')
-      .get('select')
-      .first() // TODO select by label "Category" using cypress-testing-library
+      .findByLabelText('Category')
       .as('category')
       .select(value);
 
@@ -91,8 +90,7 @@ describe('SearchBar', () => {
   it('should sort cards', () => {
     cy.get('[data-cy="search-bar"]')
       .as('searchBar')
-      .get('select')
-      .eq(1) // TODO select by label "Sort by" using cypress-testing-library
+      .findByLabelText('Sort by')
       .as('sortBy')
       .select('Name');
 
@@ -127,8 +125,7 @@ describe('SearchBar', () => {
     }
     cy.get('[data-cy="search-bar"]')
       .as('searchBar')
-      .get('select')
-      .eq(1) // TODO select by label "Sort by" using cypress-testing-library
+      .findByLabelText('Sort by')
       .as('sortBy')
       .select('Name');
 
@@ -139,8 +136,7 @@ describe('SearchBar', () => {
       .contains(value.descending);
 
     cy.get('@searchBar')
-      .get('select')
-      .eq(2) // TODO select by label "Sort order" using cypress-testing-library
+      .findByLabelText('Sort order')
       .as('sortOrder')
       .select('Ascending');
 
