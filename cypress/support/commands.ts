@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands';
+import "@cypress-audit/lighthouse/commands";
 
 // ***********************************************
 // This example commands.ts shows you how to

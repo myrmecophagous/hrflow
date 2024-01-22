@@ -24,6 +24,7 @@
     "react-error-boundary": "^4.0.12"
   },
   "devDependencies": {
+    "@cypress-audit/lighthouse": "^1.4.2",
     "@storybook/addon-actions": "^7.6.8",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.8",
