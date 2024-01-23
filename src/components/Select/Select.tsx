@@ -34,17 +34,24 @@ interface SelectProps extends ComponentPropsWithoutRef<'select'> {
 
 
 const Select = forwardRef(function Select(
-  props: SelectProps,
+  {
+    disabled,
+    label,
+    onChange,
+    options,
+    placeholder,
+    selected,
+  }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>
 ) {
   return (
     <div className={styles.input_container}>
       <label>
-        <div>{props.label}</div>
-        <select ref={ref} onChange={props.onChange} className={styles.select} value={props.selected} disabled={props.disabled}>
-          <option className={clsx(props.placeholder || styles.hidden)} aria-hidden="true">{props.placeholder}</option>
+        <div>{label}</div>
+        <select ref={ref} onChange={onChange} className={styles.select} value={selected} disabled={disabled} aria-label={label || placeholder}>
+          <option className={clsx(placeholder || styles.hidden)} aria-hidden="true">{placeholder}</option>
           {
-            props.options.map((option) => {
+            options.map((option) => {
               return (<option key={option.value} value={option.value}>{option.label}</option>);
             })
           }
