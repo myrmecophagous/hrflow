@@ -22,8 +22,8 @@ export interface Position {
 
 interface CardProps extends Job {
   hover: boolean;
-  onDragEnd: (id: number, pos: Position) => void;
-  onDragOver: (id: number, pos: Position) => void;
+  onDragEnd: () => void;
+  onDragOver: (pos: Position) => void;
   onDragStart: (id: number) => void;
   onOpen: () => void;
 };
@@ -60,10 +60,7 @@ const Card = forwardRef(function Card({
   }
 
   const handleDragEnd = (e: MouseEvent) => {
-    onDragEnd(id, {
-      x: e.clientX - offset.x,
-      y: e.clientY - offset.y,
-    });
+    onDragEnd();
   };
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -71,7 +68,7 @@ const Card = forwardRef(function Card({
       return;
     }
     debounceId.current = window.setTimeout(() => {
-      onDragOver(id, {
+      onDragOver({
         x: e.clientX - offset.x,
         y: e.clientY - offset.y,
       });

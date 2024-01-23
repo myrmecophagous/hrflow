@@ -125,7 +125,7 @@ export default function JobList({jobs, categories}: JobListProps) {
     setFilteredJobs(tmp);
   }, [jobs, filter, category, isCustomSort, sortOrder, byField]);
 
-  const handleDrop = (id: number, pos: Position) => {
+  const handleDrop = () => {
     if (draggedCardIndex === -1 || draggedCardIndex === targetCardIndex || targetCardIndex === -1) {
       return;
     }
@@ -139,7 +139,7 @@ export default function JobList({jobs, categories}: JobListProps) {
     setTargetCardIndex(-1);
   };
 
-  const handleHover = (id: number, pos: Position) => {
+  const handleHover = (pos: Position) => {
     let closestCardIndex = -1;
     let min = Infinity;
     filteredJobs.forEach((job, i) => {
@@ -152,7 +152,7 @@ export default function JobList({jobs, categories}: JobListProps) {
         }
       }
     });
-    if (closestCardIndex !== -1 && closestCardIndex !== id) {
+    if (closestCardIndex !== -1 && closestCardIndex !== draggedCardIndex) {
       setTargetCardIndex(closestCardIndex);
     } else {
       setTargetCardIndex(-1);
