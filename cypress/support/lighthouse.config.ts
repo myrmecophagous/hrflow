@@ -20,3 +20,5 @@ export const desktopConfig = {
     uploadThroughputKbps: 0,
   },
 };
+
+// https://mfrachet.github.io/cypress-audit/guides/lighthouse/good-to-know.html#lighthouse-scores-may-be-different-between-local-run-and-cypress-audit

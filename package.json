@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@cypress-audit/lighthouse": "^1.4.2",
+    "@storybook/addon-a11y": "^7.6.10",
     "@storybook/addon-actions": "^7.6.8",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.8",
@@ -45,6 +46,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "axe-playwright": "^2.0.1",
     "cypress": "^13.6.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
