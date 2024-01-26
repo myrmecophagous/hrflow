@@ -1,7 +1,10 @@
-import styles from './Skeleton.module.css';
+import styles from './Skeleton.module.scss';
 
 
 interface SkeletonProps {
+  /**
+   * Number of cards to show. Default to 10.
+   */
   length?: number;
 };
 

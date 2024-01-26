@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 
 
 export default function Header() {
   return (
     <header className={styles.header}>
       <Image src="/images/logo.svg" alt="" role="presentation" width={32} height={32} />
-      Job wiever demo
+      Job viewer demo
     </header>
   );
 }

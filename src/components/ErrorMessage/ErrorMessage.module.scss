@@ -1,0 +1,31 @@
+.error {
+  align-items: center;
+  background-color: var(--error-message-background-color, rgb(255, 246, 246));
+  border-radius: var(--border-radius, 4px);
+  border: solid thin var(--error-message-border-color, rgb(224, 180, 180));
+  color: var(--error-message-text-color, rgb(159, 58, 56));
+  display: flex;
+  height: 100%;
+  justify-self: center;
+  margin: 1em 0;
+  padding: 1em 3em;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    align-items: center;
+    background-color: var(--error-message-background-color, rgb(255, 246, 246));
+    border-radius: 50%;
+    border: solid 2px var(--error-message-border-color, rgb(224, 180, 180));
+    content: '!';
+    display: flex;
+    font-size: 1rem;
+    font-weight: bolder;
+    height: 1.2rem;
+    justify-content: center;
+    left: 1rem;
+    position: absolute;
+    position: absolute;
+    width: 1.2rem;
+  }
+}

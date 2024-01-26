@@ -1,0 +1,20 @@
+.header {
+  align-items: center;
+  background:
+    repeat-x url('/images/noise.svg'),
+    linear-gradient(
+      to right,
+      var(--header-gradient-start, rgb(121, 106, 249)),
+      var(--header-gradient-end, rgb(160, 248, 230)),
+    );
+  background-blend-mode: soft-light;
+  color: var(--header-text-color, white);
+  display: flex;
+  font-size: clamp(1rem, 0.765vw + 0.847rem, 1.5rem);
+  font-weight: 500;
+  gap: 0.5rem;
+  height: 3rem;
+  justify-content: flex-start;
+  padding: 1rem clamp(0.5rem, 12vw, 6rem);
+  white-space: nowrap;
+}

@@ -8,6 +8,9 @@
 
 # testing
 /coverage
+/cypress/screenshots
+/cypress/videos
+/artifacts
 
 # next.js
 /.next/
@@ -33,6 +36,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
 next-env.d.ts
-TODO.md
+**/TODO.md
 .vscode
+
+task_description.pdf

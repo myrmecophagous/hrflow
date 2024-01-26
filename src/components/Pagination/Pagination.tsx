@@ -2,9 +2,10 @@
 
 import { ComponentPropsWithoutRef } from 'react';
 import Image from 'next/image';
-
 import clsx from 'clsx';
-import styles from './Pagination.module.css';
+
+import styles from './Pagination.module.scss';
+import { getPaginationList } from '@/utils/utils';
 
 
 interface PaginationProps {
@@ -54,15 +55,10 @@ export default function Pagination({
     }
   };
 
-  let start = current > length - span - 1 ? -(span * 2 + 1) : current - span - 1;
-  if (start < 0 && current <= span + 1) {
-    start = 0;
-  }
-  const end = current <= span + 1 ? (span * 2 + 1) : current + span;
-  const list = Array.from({ length: length }, (_, i) => i + 1).slice(start, end);
+  const list = getPaginationList(current, length, span);
 
   return (
-    <nav className={styles.pagination}>
+    <nav className={styles.pagination} data-cy="pagination">
       <PaginationButton onClick={() => goTo(1)} disabled={current === 1} aria-label="First page">
         <Image
           src="/images/icons/first.svg"
@@ -89,7 +85,8 @@ export default function Pagination({
           className={clsx(page === current && styles.current)}
           disabled={page === current}
           key={page}
-          aria-label={`Go to page number ${page}`}
+          aria-label={page === current ? 'Current page' : `Go to page number ${page}`}
+          aria-current={page === current ? 'page' : undefined}
           onClick={() => goTo(page)}>{page}</PaginationButton>
         )
       }
@@ -120,9 +117,15 @@ export default function Pagination({
 
 
 function PaginationButton(props: ComponentPropsWithoutRef<'button'>) {
-  if (props.disabled) {
+  if (props['aria-current'] === 'page') {
     return (
-      <span className={clsx(styles.button, styles.disabled, props.className)}>
+      <button className={clsx(styles.button, styles.disabled, props.className)} aria-label={props['aria-label']} aria-current={props['aria-current']} disabled={true}>
+        {props.children}
+      </button>
+    );
+  } else if (props.disabled) {
+    return (
+      <span className={clsx(styles.button, styles.disabled, props.className)} aria-label={props['aria-label']} aria-hidden={true}>
         {props.children}
       </span>
     );

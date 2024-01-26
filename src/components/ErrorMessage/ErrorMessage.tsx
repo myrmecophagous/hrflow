@@ -1,4 +1,4 @@
-import styles from './ErrorMessage.module.css';
+import styles from './ErrorMessage.module.scss';
 
 
 interface ErrorMessageProps {
@@ -8,6 +8,6 @@ interface ErrorMessageProps {
 
 export default function ErrorMessage({error}: ErrorMessageProps) {
   return (
-    <div className={styles.error} role='alert'>{error.message}</div>
+    <div className={styles.error} role="alert">{error.message}</div>
   );
 }

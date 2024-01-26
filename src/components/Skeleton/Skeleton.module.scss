@@ -1,0 +1,68 @@
+.card {
+  --start-bg-color: rgba(150, 150, 150, 0.2);
+  --end-bg-color: rgba(50, 50, 50, 0.2);
+  --nested-element-bg-color: rgba(255, 255, 255, 0.5);
+  align-items: flex-start;
+  animation: loading 3s ease-in-out infinite;
+  background-color: var(--start-bg-color, rgba(150, 150, 150, 0.2));
+  border-radius: var(--border-radius, 4px);
+  box-sizing: border-box;
+  cursor: progress;
+  display: flex;
+  height: var(--card-height, 200px);
+  justify-content: center;
+  position: relative;
+  position: relative;
+  width: var(--card-width, 300px);
+
+  &::before {
+    background-color: var(--nested-element-bg-color, rgba(255, 255, 255, 0.5));
+    border-radius: var(--border-radius, 4px);
+    content: "";
+    display: block;
+    height: 1rem;
+    position: absolute;
+    top: 2rem;
+    width: calc(100% - 4rem);
+  }
+}
+
+.jobListSkeleton {
+  display: grid;
+  gap: 4em;
+  grid-template-columns: repeat(auto-fit, var(--card-width, 300px));
+  height: min-content;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.paginationSkeleton {
+  animation: loading 3s ease-in-out infinite;
+  background-color: var(--start-bg-color, rgba(150, 150, 150, 0.2));
+  border-radius: var(--border-radius, 4px);
+  height: 2rem;
+  margin-top: 2rem;
+  width: 50%;
+}
+
+.toolBarSkeleton {
+  animation: loading 3s ease-in-out infinite;
+  background-color: var(--start-bg-color, rgba(150, 150, 150, 0.2));
+  border-radius: var(--border-radius, 4px);
+  height: 2rem;
+  margin-bottom: 2rem;
+  width: 50%;
+}
+
+@keyframes loading {
+  0% {
+    background-color: var(--start-bg-color, rgba(150, 150, 150, 0.2));
+  }
+  50% {
+    background-color: var(--end-bg-color, rgba(50, 50, 50, 0.2));
+  }
+  100% {
+    background-color: var(--start-bg-color, rgba(150, 150, 150, 0.2));
+  }
+}

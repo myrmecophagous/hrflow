@@ -1,8 +1,7 @@
 'use client';
 
 import Select, { SelectOption } from '@/components/Select/Select';
-import styles from './SearchBar.module.css';
-import { Job } from '@/components/JobList/JobList';
+import styles from './SearchBar.module.scss';
 
 
 interface SearchBarProps {
@@ -41,7 +40,7 @@ export default function SearchBar({
     { label: 'Category', value: 'category' },
   ];
 
-  return (<div className={styles.search_bar}>
+  return (<div className={styles.search_bar} data-cy="search-bar">
     <div className={styles.input_container}>
       <label>
         <div>Search</div>
@@ -56,7 +55,7 @@ export default function SearchBar({
     />
     <Select
       label="Sort by"
-      onChange={(e) => handleSort(e.target.value as keyof Job)}
+      onChange={(e) => handleSort(e.target.value)}
       options={sorts}
       selected={selectedSort}
     />

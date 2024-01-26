@@ -1,114 +1,95 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, KeyboardEvent } from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import styles from './Modal.module.css';
-import type { Job } from '@/components/JobList/JobList';
+import styles from './Modal.module.scss';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { dateToHumanReadable } from '@/utils/utils';
+import { usePressEscape } from '@/hooks/usePressEscape';
 
 
 interface ModalProps {
-  job: Job;
   onClose: () => void;
+  children: ReactNode;
+  isOpen?: boolean;
 };
 
 const CLOSE_IMAGE_SIZE = 20;
+const ANIMATION_DURATION = .2; // s
 
-export default function Modal({job, onClose}: ModalProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  useClickOutside(ref, onClose);
+export default function Modal({onClose, children, isOpen}: ModalProps) {
 
-  const handleKeyUp = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = React.useState(true);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    const timeoutId = setTimeout(() => {
       onClose();
-    }
+      clearTimeout(timeoutId);
+    }, ANIMATION_DURATION * 1000);
   }, [onClose]);
 
+  useClickOutside(modalRef, close);
+  usePressEscape(close);
+
   useEffect(() => {
-    document.addEventListener('keyup', (e) => handleKeyUp(e as unknown as KeyboardEvent));
-    return document.removeEventListener('keyup', (e) => handleKeyUp(e as unknown as KeyboardEvent));
-  }, [handleKeyUp]);
+    if (modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [modalRef]);
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.modal} ref={ref}>
-        <button className={styles.close} onClick={onClose} aria-label="Close">
-          <Image
-            alt=""
-            height={CLOSE_IMAGE_SIZE}
-            role="presentation"
-            src="/images/icons/close.svg"
-            width={CLOSE_IMAGE_SIZE}
-          />
-        </button>
-        <h1>{job.name}</h1>
-        <div className={styles.tags}>
-          {
-            job.tags && job.tags.map((tag) => (<div className={styles.tag} key={tag.name}>
-                {tag.name}: {tag.value}
-              </div>))
-          }
-        </div>
-        <div>Job posted: {dateToHumanReadable(job.created_at)}</div>
-        {
-          job.location && <div>Location: {job.location?.text}</div>
-        }
+  const overlayVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
 
-        <div>
-          <h2 className={styles.h2}>Summary</h2>
-          <div>{job.summary}</div>
-        </div>
+  const modalVariants = {
+    initial: { opacity: 0, transform: 'scale(.9)' },
+    animate: { opacity: 1, transform: 'scale(1)' },
+  };
 
-        {
-          job.sections && job.sections.length > 0 && (<>{
-            job.sections.map((section, index) => (
-              <div key={index}>
-                {
-                  section.name && <h2 className={styles.h2}>{section.name}</h2>
-                }
-                <div>{section.description}</div>
-              </div>
-            ))
-          }</>)
-        }
-
-        {
-          job.skills && job.skills.length > 0 && (<>
-            <h2 className={styles.h2}>Skills</h2>
-            <ul>
-              {
-                job.skills.map((skill, index) => (
-                  <li key={index}>{skill.name}</li>
-                ))
-              }
-            </ul>
-          </>)
-        }
-        {
-          job.tasks && job.tasks.length > 0 && (<>
-            <h2 className={styles.h2}>Tasks</h2>
-            <ul>
-              {
-                job.tasks.map((task, index) => (
-                  <li key={index}>{task.name}</li>
-                ))
-              }
-            </ul>
-          </>)
-        }
-        {
-          job.languages && job.languages.length > 0 && (<>
-            <h2 className={styles.h2}>Languages</h2>
-            <ul>
-              {
-                job.languages.map((language, index) => (
-                  <li key={index}>{language.name}</li>
-                ))
-              }
-            </ul>
-          </>)
-        }
-      </div>
-    </div>
+  return createPortal(
+    <AnimatePresence>
+      { open && <>
+        <motion.div
+          animate="animate"
+          className={styles.overlay}
+          exit="initial"
+          initial="initial"
+          key="overlay"
+          transition={{ duration : ANIMATION_DURATION }}
+          variants={overlayVariants}
+        />
+        <motion.dialog
+          animate="animate"
+          className={styles.modal}
+          exit="initial"
+          initial="initial"
+          key="modal"
+          ref={modalRef}
+          transition={{ duration : ANIMATION_DURATION }}
+          variants={modalVariants}
+          data-cy="card-dialog"
+        >
+          <button className={styles.close} onClick={close} aria-label="Close">
+            <Image
+              alt=""
+              height={CLOSE_IMAGE_SIZE}
+              role="presentation"
+              src="/images/icons/close.svg"
+              width={CLOSE_IMAGE_SIZE}
+            />
+          </button>
+          { children }
+        </motion.dialog>
+      </>}
+    </AnimatePresence>,
+    document.body
   );
 }

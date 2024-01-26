@@ -2,10 +2,17 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 
 import { inter } from '../src/app/font';
-import '../src/app/globals.css';
+import '../src/app/globals.scss';
 
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <div className={inter.className}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -15,13 +22,6 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <div className={inter.className}>
-        <Story />
-      </div>
-    ),
-  ]
 };
 
 export default preview;

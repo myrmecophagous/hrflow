@@ -1,0 +1,36 @@
+:root {
+  --message-color: rgb(32, 124, 124);
+  --card-border-color: rgb(52, 203, 230);
+  --card-background-color: rgb(242, 253, 253);
+  --card-width: 300px;
+  --card-height: 280px;
+  --border-radius: 4px;
+  --header-gradient-start: rgb(121, 106, 249);
+  --header-gradient-end: rgb(160, 248, 230);
+
+  --color-black: rgba(0, 0, 0, 0.8);
+  --color-border-black: rgba(0, 0, 0, 0.1);
+  --color-background-black: rgba(0, 0, 0, 0.05);
+  --color-white: rgba(255, 255, 255, 0.8);
+  --color-border-white: rgba(255, 255, 255, 0.1);
+  --color-background-white: rgba(255, 255, 255, 0.05);
+
+  --color-light-grey: rgba(50, 50, 50, 0.2);
+  --color-dark-grey: rgba(150, 150, 150, 0.2);
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+body[aria-hidden="true"] {
+  overflow: hidden;
+  max-height: 100vh;
+}

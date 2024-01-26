@@ -10,15 +10,16 @@ import {
 } from 'react';
 
 import Card from '@/components/Card/Card';
+import CardDetails from '@/components/CardDetails/CardDetails';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBar from '@/components/SearchBar/SearchBar';
-import styles from './JobList.module.css';
+import styles from './JobList.module.scss';
 import { Position } from '@/components/Card/Card';
 import { SelectOption } from '@/components/Select/Select';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { getDistance } from '@/utils/utils';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 
 export interface Job {
@@ -56,9 +57,10 @@ interface JobListProps {
   jobs: Job[];
 };
 
+const CARDS_PER_PAGE = 10;
+
 export default function JobList({jobs, categories}: JobListProps) {
   // Search Bar & Local Storage
-  const [cardsPerPage] = useLocalStorage<number>('cardsPerPage', 10);
   const [filter, setFilter, resetFilter] = useLocalStorage<string>('filter', '');
   const [category, setCategory, resetCategory] = useLocalStorage<string>('category', '');
   const categoryOptions = categories.map((category) => ({
@@ -72,10 +74,10 @@ export default function JobList({jobs, categories}: JobListProps) {
   };
   const [sortOrder, setSortOrder, resetSortOrder] = useLocalStorage<number>('sortOrder', 1);
   const reset = () => {
-    resetFilter();
     resetCategory();
-    resetSort();
+    resetFilter();
     resetPage();
+    resetSort();
     resetSortOrder();
   };
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
@@ -85,7 +87,8 @@ export default function JobList({jobs, categories}: JobListProps) {
 
   // Drag & Drop
   const [isCustomSort, setIsCustomSort] = useState<boolean>(false);
-  const [activeCardId, setActiveCardId] = useState<number>(-1);
+  const [targetCardIndex, setTargetCardIndex] = useState<number>(-1);
+  const [draggedCardIndex, setDraggedCardIndex] = useState<number>(-1);
 
   const byField = useCallback((left: Job, right: Job) => {
     if (isCustomSort) {
@@ -122,47 +125,64 @@ export default function JobList({jobs, categories}: JobListProps) {
     setFilteredJobs(tmp);
   }, [jobs, filter, category, isCustomSort, sortOrder, byField]);
 
-  const handleDrop = (id: number, pos: Position) => {
-    let min = Infinity;
+  const handleDrop = () => {
+    if (draggedCardIndex === -1 || draggedCardIndex === targetCardIndex || targetCardIndex === -1) {
+      return;
+    }
+    setIsCustomSort(true); // this will cause the array to re-render
+    setFilteredJobs(tmp => {
+      const tmp2 = tmp.toSpliced(draggedCardIndex, 1);
+      tmp2.splice(targetCardIndex, 0, tmp[draggedCardIndex]);
+      return tmp2;
+    });
+    setDraggedCardIndex(-1);
+    setTargetCardIndex(-1);
+  };
+
+  const handleHover = (pos: Position) => {
     let closestCardIndex = -1;
+    let min = Infinity;
     filteredJobs.forEach((job, i) => {
-      if (job.ref?.current) {
-        const {x, y} = job.ref.current.getBoundingClientRect();
-        const distance = getDistance(pos, {x, y});
+      if (job?.ref?.current) {
+        const {x, y, height} = job.ref.current.getBoundingClientRect();
+        const distance = getDistance(pos, {x, y: y + height / 2});
         if (distance < min) {
           min = distance;
           closestCardIndex = i;
         }
       }
     });
-    if (closestCardIndex === -1) {
-      return;
+    if (closestCardIndex !== -1 && closestCardIndex !== draggedCardIndex) {
+      setTargetCardIndex(closestCardIndex);
+    } else {
+      setTargetCardIndex(-1);
     }
-    const moveCardIndex = filteredJobs.findIndex((job) => job.id === id);
-    if (moveCardIndex === closestCardIndex) {
-      return;
-    }
-    setIsCustomSort(true); // this will cause the array to re-render
-    setFilteredJobs(tmp => {
-      const tmp2 = [...tmp];
-      [tmp2[moveCardIndex], tmp2[closestCardIndex]] = [tmp2[closestCardIndex], tmp2[moveCardIndex]];
-      return tmp2;
-    });
+  };
+
+  const handleDragStart = (id: number) => {
+    const i = filteredJobs.findIndex((job) => job.id === id);
+    setDraggedCardIndex(i);
   };
 
   // Modal
+  const [activeCardId, setActiveCardId] = useState<number>(-1);
   const openCard = (job: Job) => {
     setActiveCardId((id) => (id === job.id ? -1 : job.id));
   };
 
-  const closeCard = useCallback(() => setActiveCardId(-1), []);
-
   const activeJob = jobs.find((job) => job?.id === activeCardId);
+
+  const closeCard = useCallback(() => {
+    activeJob?.ref?.current?.focus();
+    setActiveCardId(-1);
+  }, [activeJob]);
 
   return (<>
     {
       activeJob &&
-        <Modal job={activeJob} onClose={closeCard} />
+        <Modal onClose={closeCard}>
+          <CardDetails job={activeJob} />
+        </Modal>
     }
 
     <SearchBar
@@ -178,16 +198,19 @@ export default function JobList({jobs, categories}: JobListProps) {
       selectedSortOrder={sortOrder}
     />
 
-    <div className={styles.container}>
+    <div className={styles.container} data-cy="card-list">
       {
         jobs && filteredJobs.length > 0 &&
-          filteredJobs.slice((page - 1) * cardsPerPage, page * cardsPerPage)
-          .map((job) => <Card
+          filteredJobs.slice((page - 1) * CARDS_PER_PAGE, page * CARDS_PER_PAGE)
+          .map((job, i) => <Card
             key={job.id}
             {...job}
-            ref={job.ref}
-            onOpen={() => openCard(job)}
+            hover={i === targetCardIndex}
             onDragEnd={handleDrop}
+            onDragOver={handleHover}
+            onDragStart={handleDragStart}
+            onOpen={() => openCard(job)}
+            ref={job.ref}
           />)
       }
       {
@@ -201,10 +224,10 @@ export default function JobList({jobs, categories}: JobListProps) {
     </div>
 
     {
-      (jobs && filteredJobs.length > cardsPerPage)
+      (jobs && filteredJobs.length > CARDS_PER_PAGE)
       ?
         <ErrorBoundary FallbackComponent={ErrorMessage}>
-          <Pagination current={page} length={Math.ceil(jobs.length / cardsPerPage)} onClick={setPage} />
+          <Pagination current={page} length={Math.ceil(jobs.length / CARDS_PER_PAGE)} onClick={setPage} />
         </ErrorBoundary>
       :
         <div></div>
