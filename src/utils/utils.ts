@@ -5,7 +5,7 @@ const dateToHumanReadable = (date: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
   };
   return new Date(date).toLocaleDateString('en-US', options);
 };
@@ -17,6 +17,7 @@ const getDistance = (left: Position, right: Position) => {
 };
 
 const getPaginationList = (current: number, length: number, span: number): number[] => {
+  // TODO this could be improved
   let start = current > length - span - 1 ? -(span * 2 + 1) : current - span - 1;
   if (start < 0 && current <= span + 1) {
     start = 0;

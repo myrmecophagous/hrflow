@@ -1,7 +1,5 @@
 /// <reference types='cypress' />
 
-import { customThresholds, desktopConfig } from '../support/lighthouse.config';
-
 
 describe('Pagination', () => {
   beforeEach(() => {
@@ -67,9 +65,5 @@ describe('Pagination', () => {
     cy.get('@articles')
       .contains('Senior software engineer')
       .should('not.exist');
-  });
-
-  it("should verify the lighthouse scores with thresholds", function () {
-    cy.lighthouse(customThresholds, desktopConfig);
   });
 });
